@@ -12,6 +12,8 @@
         "tsConfig": "libs/mock-server/tsconfig.lib.json",
         "packageJson": "libs/mock-server/package.json",
         "main": "libs/mock-server/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "assets": ["libs/mock-server/*.md"]
       }
     },
