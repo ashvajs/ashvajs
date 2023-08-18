@@ -1,5 +1,8 @@
 # @ashvajs/mock-server
 
+[![npm](https://img.shields.io/npm/dm/@ashvajs/mock-server.svg)](https://www.npmjs.com/package/@ashvajs/mock-server)
+[![npm](https://img.shields.io/npm/v/@ashvajs/mock-server.svg)](https://www.npmjs.com/package/@ashvajs/mock-server)
+
 ## Description
 Simple mock server to serve static/dynamic routes for mock api.
 
