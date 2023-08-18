@@ -1,0 +1,48 @@
+{
+  "name": "mock-server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/mock-server/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/mock-server",
+        "tsConfig": "libs/mock-server/tsconfig.lib.json",
+        "packageJson": "libs/mock-server/package.json",
+        "main": "libs/mock-server/src/index.ts",
+        "assets": ["libs/mock-server/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs mock-server {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/mock-server/**/*.ts",
+          "libs/mock-server/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/mock-server/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

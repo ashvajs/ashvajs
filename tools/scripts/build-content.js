@@ -1,0 +1,1 @@
+console.log('build-content.js: building content');
