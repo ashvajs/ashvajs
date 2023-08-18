@@ -30,6 +30,7 @@ jobs:
       - run: npm install
       - run: |
           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+          echo "Token for test ${{secrets.npm_token}}"
       - run: npx nx run-many -t publish --args="--ver=${{  github.ref_name }} --tag=latest"
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
