@@ -11,21 +11,24 @@ Simple mock server to serve static/dynamic routes for mock api.
 
 Create your mock server object with mock server class and pass express app object with folder path.
 
+## Folder structure
 ```
 mocks
-- api
-- - v1
-- - - test // route
-- - - - post.json // serves as /api/v1/test [post method]
-- - - - get.json // serves as /api/v1/test [get method]
-- - - - delete.json // serves as /api/v1/test [delete method]
-- - - - patch.json // serves as /api/v1/test [patch method]
-- - - dynamic // route
-- - - - post // for dynamic routes
-- - - - - index.js 
-- - - - get
-- - - - - index.js
+..api
+....v1
+......test // route
+........post.json // serves as /api/v1/test [post method]
+........get.json // serves as /api/v1/test [get method]
+........delete.json // serves as /api/v1/test [delete method]
+........patch.json // serves as /api/v1/test [patch method]
+......dynamic // route
+........post // for dynamic routes
+..........index.js 
+........get
+..........index.js
 ```
+
+## Example
 
 ```
 import path from 'path';
