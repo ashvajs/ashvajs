@@ -14,7 +14,7 @@
         "main": "libs/mock-server/src/index.ts",
         "updateBuildableProjectDepsInPackageJson": true,
         "buildableProjectDepsInPackageJsonType": "dependencies",
-        "assets": ["libs/mock-server/*.md"]
+        "assets": ["libs/mock-server/*.md", "libs/mock-server/LICENCE"]
       }
     },
     "publish": {
