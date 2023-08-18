@@ -29,8 +29,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: |
-          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
-      - run: npx nx run-many -t publish --args="--ver=0.0.0 --tag=latest"
+      - run: npx nx run-many -t publish --args="--ver=${{  github.ref_name }} --tag=latest"
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
