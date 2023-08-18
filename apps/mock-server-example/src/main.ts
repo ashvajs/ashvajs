@@ -1,8 +1,8 @@
-import express from 'express';
 import path from 'path';
+import express from 'express';
+import { MockServer } from '@ashvajs/mock-server';
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
-import { MockServer } from '@ashvajs/mock-server';
 const app = express();
 const mockserver = new MockServer(
   {
