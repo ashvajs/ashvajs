@@ -33,6 +33,19 @@ mocks
 ..........index.js
 ```
 
+# Dynamic route example
+```
+dynamic/post/index.js
+
+module.exports = (req, res, options) => {
+  //write your business logic
+  return {
+    message: 'js response example',
+  };
+};
+
+```
+
 ## Example
 
 ## ES6
