@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as path from 'path';
 import Response from './response';
 import errors from './error';
 
@@ -18,25 +19,31 @@ class MockServer {
     this.fse = fse;
   }
 
-  ensureSlash(path) {
-    return path.substr(path.length - 1, 1) === '/' ? path : `${path}/`;
+  ensureNoSlash(path) {
+    return path.substr(path.length - 1, 1) === '/'
+      ? path.substr(0, path.length - 1)
+      : `${path}`;
   }
 
   init() {
     console.log('--- init mock-server');
     this.app.all(this.config.staticMocks, (req, res) => {
-      const path = req._parsedUrl.pathname;
+      const reqPath = req._parsedUrl.pathname;
       const method = req.method.toLowerCase();
-      let finalPath = this.ensureSlash(this.config.staticApiPath) + path;
+      let finalPath = reqPath.resolve(
+        this.ensureNoSlash(this.config.staticApiPath),
+        reqPath
+      );
+      // console.log(finalPath);
       let response: any = new Response(errors.notfound()).error();
       let isJs = false;
-      if (this.fse.existsSync(`${finalPath}/${method}/index.js`)) {
-        finalPath = `${finalPath}/${method}/index.js`;
+      if (this.fse.existsSync(path.join(finalPath, method, 'index.js'))) {
+        finalPath = path.join(finalPath, method, 'index.js');
         isJs = true;
-      } else if (this.fse.existsSync(`${finalPath}/${method}.json`)) {
-        finalPath = `${finalPath}/${method}.json`;
-      } else if (this.fse.existsSync(`${finalPath}/index.json`)) {
-        finalPath = `${finalPath}/index.json`;
+      } else if (this.fse.existsSync(path.join(finalPath, `${method}.json`))) {
+        finalPath = path.join(finalPath, `${method}.json`);
+      } else if (this.fse.existsSync(path.join(finalPath, `index.json`))) {
+        finalPath = path.join(finalPath, `index.json`);
       }
       console.log(`mock serving_path=${finalPath}`);
       try {
