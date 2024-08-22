@@ -16,6 +16,11 @@ Create your mock server object with mock server class and pass express app objec
 mocks
 ..api
 ....v1
+......product
+........[product] // serves /api/v1/product/[apple|banana|<var>]/list-items
+.........list-items
+............get.json // serves /api/v1/[apple|banana|any]/list-items [get method]
+............post.json // serves /api/v1/[apple|banana|any]/list-items [get method]
 ......test // route
 ........post.json // serves as /api/v1/test [post method]
 ........get.json // serves as /api/v1/test [get method]
@@ -30,10 +35,33 @@ mocks
 
 ## Example
 
+## ES6
 ```
 import path from 'path';
 import express from 'express';
 import { MockServer } from '@ashvajs/mock-server';
+const host = process.env.HOST ?? 'localhost';
+const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+const app = express();
+const mockserver = new MockServer(
+  {
+    staticApiPath: path.resolve('apps/mock-server-example/mocks'),
+  },
+  app
+);
+mockserver.init();
+
+app.listen(port, host, () => {
+  console.log(`[ ready ] http://${host}:${port}`);
+});
+
+```
+
+## Javascript
+```
+const path = require('path');
+const express = require('express');
+const { MockServer } = require('@ashvajs/mock-server');
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 const app = express();
