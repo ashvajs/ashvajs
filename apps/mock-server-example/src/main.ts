@@ -14,7 +14,7 @@ const mockserver = new MockServer(
 mockserver.init();
 
 app.get('/', (req, res) => {
-  res.send({ message: 'Try using /api/v1/test' });
+  res.send({ message: 'Try using ', endpoints: mockserver?.allEndpoints });
 });
 
 app.listen(port, host, () => {

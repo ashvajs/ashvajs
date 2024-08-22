@@ -17,10 +17,10 @@ mocks
 ..api
 ....v1
 ......product
-........[product] // serves /api/v1/product/[apple|banana|<var>]/list-items
+........[product] // serves /api/v1/product/[apple|etc|string]/list-items
 .........list-items
-............get.json // serves /api/v1/[apple|banana|any]/list-items [get method]
-............post.json // serves /api/v1/[apple|banana|any]/list-items [get method]
+............get.json // serves /api/v1/product/[apple|etc|string]/list-items [get method]
+............post.json // serves /api/v1/product/[apple|etc|string]/list-items [get method]
 ......test // route
 ........post.json // serves as /api/v1/test [post method]
 ........get.json // serves as /api/v1/test [get method]
@@ -80,5 +80,7 @@ app.listen(port, host, () => {
 ```
 
 
+## Source Code
+see `https://github.com/ashvajs/ashvajs`
 ## Examples
 see `apps/mock-server-example`

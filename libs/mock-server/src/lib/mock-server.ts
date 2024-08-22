@@ -69,15 +69,17 @@ class MockServer {
   getFinalPath(url) {
     const index = this.allEndpoints.indexOf(url);
     let matchedItem = '';
+    const params = {
+      url,
+    };
     if (index === -1) {
-      const params = {};
       this.allEndpoints.forEach((item) => {
         let hasMatch = true;
         const leftSide = item.split(path.sep);
         const rightSide = url.split('/');
         leftSide.forEach((item, idx) => {
-          if (hasMatch && item.match(new RegExp('\\[.*\\]'))) {
-            params[item.match(new RegExp('\\[.*\\]'))[1]] = rightSide[idx];
+          if (hasMatch && item.match(new RegExp('\\[(.*)\\]'))) {
+            params[item.match(new RegExp('\\[(.*)\\]'))[1]] = rightSide[idx];
           } else if (hasMatch) {
             hasMatch = item === rightSide[idx];
           }
@@ -88,12 +90,18 @@ class MockServer {
       });
     }
     if (matchedItem) {
-      return path.resolve(
-        this.ensureNoSlashEnd(this.config.staticApiPath),
-        matchedItem
-      );
+      return {
+        path: path.resolve(
+          this.ensureNoSlashEnd(this.config.staticApiPath),
+          matchedItem
+        ),
+        params,
+      };
     }
-    return path.resolve(this.ensureNoSlashEnd(this.config.staticApiPath), url);
+    return {
+      path: path.resolve(this.ensureNoSlashEnd(this.config.staticApiPath), url),
+      params,
+    };
   }
 
   init() {
@@ -106,8 +114,8 @@ class MockServer {
 
       // console.log(reqPath);
       console.log(`looking for=${urlToServe}`);
-
-      let finalPath = this.getFinalPath(urlToServe);
+      const returnObj = this.getFinalPath(urlToServe);
+      let finalPath = returnObj.path;
       let response: any = new Response(errors.notfound()).error();
       let isJs = false;
       if (this.fse.existsSync(path.join(finalPath, method, 'index.js'))) {
@@ -132,7 +140,7 @@ class MockServer {
           }
         }
         if (typeof response === 'function') {
-          response = response(req, res);
+          response = response(req, res, returnObj);
         }
       } catch (ex) {
         console.log(ex);
