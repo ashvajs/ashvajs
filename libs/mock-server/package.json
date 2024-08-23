@@ -1,5 +1,12 @@
 {
   "name": "@ashvajs/mock-server",
   "version": "0.0.1",
-  "dependencies": {}
+  "dependencies": {},
+  "keywords": [],
+  "author": "navneetnaagpal@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashvajs/ashvajs.git"
+  }
 }
