@@ -20,7 +20,7 @@ mocks
 ........[product] // serves /api/v1/product/[apple|etc|string]/list-items
 .........list-items
 ............get.json // serves /api/v1/product/[apple|etc|string]/list-items [get method]
-............post.json // serves /api/v1/product/[apple|etc|string]/list-items [get method]
+.........post.json // serves /api/v1/product/[apple|etc|string] [post method]
 ......test // route
 ........post.json // serves as /api/v1/test [post method]
 ........get.json // serves as /api/v1/test [get method]
@@ -32,12 +32,16 @@ mocks
 ........get
 ..........index.js
 ```
-
 # Dynamic route example
+
+## dynamic/post/index.js
 ```
-dynamic/post/index.js
 
 module.exports = (req, res, options) => {
+  // options.params to access url parameters
+  // e.g. route is /api/v1/product/[productid]
+  // if call is done for /api/v1/product/prod-149 
+  // options.params.productid -> prod-149
   //write your business logic
   return {
     message: 'js response example',
