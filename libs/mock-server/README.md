@@ -97,8 +97,5 @@ app.listen(port, host, () => {
 
 ```
 
-
-## Source Code
-see `https://github.com/ashvajs/ashvajs`
 ## Examples
 see `apps/mock-server-example`

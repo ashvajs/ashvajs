@@ -43,6 +43,7 @@ module.exports = (req, res, options) => {
   // if call is done for /api/v1/product/prod-149 
   // options.params.productid -> prod-149
   //write your business logic
+  
   return {
     message: 'js response example',
   };
