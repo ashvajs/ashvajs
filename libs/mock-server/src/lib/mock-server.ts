@@ -126,7 +126,7 @@ class MockServer {
       } else if (this.fse.existsSync(path.join(finalPath, `index.json`))) {
         finalPath = path.join(finalPath, `index.json`);
       }
-      console.log(`mock serving_path=${finalPath}`);
+      console.log(`serving "${path.relative(this.config.staticApiPath, finalPath)}"`);
       try {
         if (isJs) {
           console.log(`executing dynamic route`);

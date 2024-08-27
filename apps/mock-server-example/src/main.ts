@@ -6,7 +6,7 @@ const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 const app = express();
 const mockserver = new MockServer(
   {
-    staticMocks: '/api/*',
+    staticMocks: '*',
     staticApiPath: path.resolve('apps/mock-server-example/mocks'),
   },
   app

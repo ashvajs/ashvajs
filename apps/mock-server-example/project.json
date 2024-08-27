@@ -42,10 +42,13 @@
       "options": {
         "buildTarget": "mock-server-example:build"
       },
+      "dependsOn": ["^build"],
+
       "configurations": {
         "development": {
           "buildTarget": "mock-server-example:build:development"
         },
+
         "production": {
           "buildTarget": "mock-server-example:build:production"
         }
