@@ -112,8 +112,13 @@ class MockServer {
       const method = req.method.toLowerCase();
       const urlToServe = this.ensureNoSlashStart(reqPath);
 
+      if (!urlToServe) {
+        return res.status(200).send({
+          endpoints: this.allEndpoints,
+        });
+      }
       // console.log(reqPath);
-      console.log(`looking for=${urlToServe}`);
+      console.log(`[${method}]=${urlToServe}`);
       const returnObj = this.getFinalPath(urlToServe);
       let finalPath = returnObj.path;
       let response: any = new Response(errors.notfound()).error();
@@ -126,7 +131,12 @@ class MockServer {
       } else if (this.fse.existsSync(path.join(finalPath, `index.json`))) {
         finalPath = path.join(finalPath, `index.json`);
       }
-      console.log(`serving "${path.relative(this.config.staticApiPath, finalPath)}"`);
+      console.log(
+        `serving:[${method}]"${path.relative(
+          this.config.staticApiPath,
+          finalPath
+        )}"`
+      );
       try {
         if (isJs) {
           console.log(`executing dynamic route`);

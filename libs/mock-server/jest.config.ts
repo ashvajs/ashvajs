@@ -1,6 +1,7 @@
 /* eslint-disable */
 export default {
   displayName: 'mock-server',
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!<rootDir>/node_modules/'],
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

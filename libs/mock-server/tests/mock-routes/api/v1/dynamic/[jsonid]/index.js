@@ -1,7 +1,7 @@
 module.exports = (req, res, options) => {
-  //write your business logic
+  // business logic goes here
   return {
-    message: 'js response example',
+    success: true,
     options,
   };
 };
